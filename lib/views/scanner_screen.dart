@@ -15,34 +15,35 @@ class _ScannerScreenState extends State<ScannerScreen> {
   int  minBpm = 40;
   int maxBpm = 200;
   List<int> recentBPMs = [];
+  bool isScanning = true;
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Scanner")),
-      body: Center(
-        child: HeartBPMDialog(
+      body: 
+      Center(
+        child: 
+        isScanning ?
+        HeartBPMDialog(
           context: context,
+          showTextValues: false,
+          borderRadius: 10,
+          centerLoadingWidget: Column(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 10,),
+              Text("Initializing Sensor..." , style: TextStyle(color: Colors.black),),
+
+            ],
+          ),
+
           onRawData: (value) {
             
           }, // can ignore
           onBPM: (value) {
   if(value < minBpm || value > maxBpm ){
-  //   recentBPMs.add(value);
-  
-  //      if(recentBPMs.length >= 3){
-  //       double avg = recentBPMs.reduce(
-  //         (a,b) => a+ b)/recentBPMs.length;
-
-  //         Get.to(
-  //            () => ResultScreen(bpm: avg.toInt())
-  //         );
-  //         recentBPMs.clear();
-  //      }
-
-  // } else{
-
     recentBPMs.clear();
     return;
   }
@@ -56,16 +57,21 @@ if( recentBPMs.length > 5){
      double avg = recentBPMs.reduce(
       (a,b) => a + b
      )/ recentBPMs.length;
+
      bool stable  = recentBPMs.every(
        (bpm) => (bpm - avg).abs() < 5
      );
      if(stable && recentBPMs.length == 5){
+      setState(() {
+        isScanning = false;
+      });
       Get.to( () => ResultScreen(bpm: avg.toInt()));
-      recentBPMs.clear();
+     // recentBPMs.clear();
      }
 
           },
-        ),
+        ) :
+        Container()
       ),
     );
   }
