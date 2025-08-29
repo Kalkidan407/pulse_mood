@@ -11,7 +11,7 @@ class ResultScreen extends StatelessWidget {
   String detectMood(int bpm) {
     if (bpm < 70) return "Calm 😌";
     if (bpm < 90) return "Normal 🙂";
-    return "Stressed 😬";
+    return "Stressed 🙁";
   }
 
   @override
