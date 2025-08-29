@@ -26,7 +26,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("Scanner")),
       body: 
-      Padding(
+      Container(
         padding: EdgeInsets.all(100),
         child: 
         isScanning ?
