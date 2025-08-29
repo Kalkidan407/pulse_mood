@@ -1,27 +1,33 @@
-// class _ScannerScreenState extends State<ScannerScreen> {
-//   int bpm = 0;
-//   bool isScanning = true;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("Scanner")),
-//       body: Center(
-//         child: isScanning
-//             ? HeartBPMDialog(
-//                 context: context,
-//                 onBPM: (value) {
-//                   setState(() => bpm = value);
-
-//                   if (bpm > 0) {
-//                     setState(() => isScanning = false); // stop showing dialog
-//                     Get.to(() => ResultScreen(bpm: bpm));
-//                   }
-//                 },s
-//               )
-//             : Container(), // empty container when stopped
-//       ),
-//     );
-//   }
+// void showCustomBottomSheet(BuildContext context) {
+//   showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true, // makes it possible to use full height if needed
+//     shape: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+//     ),
+//     builder: (context) {
+//       return DraggableScrollableSheet(
+//         initialChildSize: 0.4, // 40% of screen height
+//         minChildSize: 0.2,     // minimum 20%
+//         maxChildSize: 0.9,     // maximum 90%
+//         expand: false,
+//         builder: (context, scrollController) {
+//           return Container(
+//             padding: EdgeInsets.all(16),
+//             child: ListView(
+//               controller: scrollController,
+//               children: [
+//                 Text(
+//                   "This is a custom bottom sheet",
+//                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//                 ),
+//                 SizedBox(height: 20),
+//                 Text("You can put any widget here."),
+//               ],
+//             ),
+//           );
+//         },
+//       );
+//     },
+//   );
 // }
-// // 

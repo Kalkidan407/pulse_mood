@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:heart_bpm/heart_bpm.dart';
 import 'package:get/get.dart';
+//get/get_core/src/get_main.dart
+
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pulse_mood/test.dart';
 import '../controllers/mood_controller.dart';
 import 'result_screen.dart';
@@ -23,11 +26,14 @@ class _ScannerScreenState extends State<ScannerScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("Scanner")),
       body: 
-      Center(
+      Padding(
+        padding: EdgeInsets.all(100),
         child: 
         isScanning ?
         HeartBPMDialog(
           context: context,
+          cameraWidgetHeight: 280,
+          cameraWidgetWidth: 185,
           showTextValues: false,
           borderRadius: 10,
           centerLoadingWidget: Column(
@@ -42,7 +48,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
           onRawData: (value) {
             
           }, // can ignore
-          onBPM: (value) {
+
+        onBPM: (value) {
+
+   if (!isScanning) return;
   if(value < minBpm || value > maxBpm ){
     recentBPMs.clear();
     return;
@@ -58,16 +67,36 @@ if( recentBPMs.length > 5){
       (a,b) => a + b
      )/ recentBPMs.length;
 
+  final avgInt = avg.toInt();
+  setState(
+    () => isScanning = false
+  );
+
+
+
      bool stable  = recentBPMs.every(
        (bpm) => (bpm - avg).abs() < 5
      );
+     
      if(stable && recentBPMs.length == 5){
       setState(() {
         isScanning = false;
       });
-      Get.to( () => ResultScreen(bpm: avg.toInt()));
+      recentBPMs.clear();
+      
+     
      // recentBPMs.clear();
      }
+
+      Get.to(
+    () => ResultScreen(
+        bpm: avgInt)
+    
+    )?.then(
+        (_) {
+  setState(() => isScanning = true); // restart when user returns
+}
+);
 
           },
         ) :
