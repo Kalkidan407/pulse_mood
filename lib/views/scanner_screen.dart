@@ -26,8 +26,18 @@ class _ScannerScreenState extends State<ScannerScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("Scanner")),
       body: 
+      Column(
+        children: [
+          SizedBox(height: 20,),
+
+Container(
+  child: Image.asset('assets/images/hairy-cartoon-7322434_1280.png', height: 83,),
+),
+
+SizedBox(height: 15,),
+
       Container(
-        padding: EdgeInsets.all(100),
+        padding: EdgeInsets.only(top: 25, bottom: 40, left: 90, right: 50 ),
         child: 
         isScanning ?
         HeartBPMDialog(
@@ -102,6 +112,8 @@ if( recentBPMs.length > 5){
         ) :
         Container()
       ),
+        ]
+      )
     );
   }
 }

@@ -78,10 +78,16 @@ class HomeScreen extends StatelessWidget {
       body: 
           Center(
        child: 
-          ElevatedButton(
+          IconButton(
+            icon: Icon(Icons.favorite, size: 225,
+               color: Colors.redAccent,),
+            
+
             onPressed: () => Get.to(() => ScannerScreen()),
-            child: Text("Check My Mood"),
+            //child: Text("Check My Mood"),
           ),
+  
+
           )
           // ElevatedButton(
           //   onPressed: () => Get.to(() => summary_scre),
