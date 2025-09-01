@@ -6,6 +6,7 @@ import '../controllers/mood_controller.dart';
 import 'scanner_screen.dart';
 import 'summary_screen.dart';
 import 'package:pulse_mood/thme/themeService.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import '../views/summary_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -57,12 +58,21 @@ class HomeScreen extends StatelessWidget {
     
     return Scaffold(
      backgroundColor: Colors.white ,
+   
       appBar: AppBar(
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: 
-        Center(
-          child: 
-        Text("Mood Checker", )
-        ),
+      
+          
+        Text(" Pluse Mood ", 
+        style: GoogleFonts.oswald(
+          fontWeight: FontWeight.bold, 
+          fontSize: 18, 
+        
+          
+          ), )
+        ,
+
         actions: [
 
   IconButton(
@@ -72,9 +82,12 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
-          IconButton(onPressed: () {
+          IconButton(
+            onPressed: () {
             themeServices.switchTheme();
-          }, icon: Icon(Icons.brightness_6))
+          },
+           icon: Icon(Icons.brightness_6)
+        )
 
 
             
@@ -110,7 +123,9 @@ SizedBox(
 
          ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
-            child: Text("Check My Mood"),
+            child: Text("Check My Mood",
+            style: GoogleFonts.ubuntu(),
+            ),
           ),
   
 
