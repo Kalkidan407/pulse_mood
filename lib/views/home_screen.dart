@@ -5,10 +5,13 @@ import 'package:pulse_mood/views/history.dart';
 import '../controllers/mood_controller.dart';
 import 'scanner_screen.dart';
 import 'summary_screen.dart';
+import 'package:pulse_mood/thme/themeService.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import '../views/summary_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final controller = Get.find<MoodController>();
+   final themeServices = ThemeService();
 
 
   void showBottomSheet(BuildContext context){
@@ -54,14 +57,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-     
+     backgroundColor: Colors.white ,
+   
       appBar: AppBar(
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: 
-        Center(
-          child: 
-        Text("Mood Checker")),
-        actions: [
+      
+          
+        Text(" Pluse Mood ", 
+        style: GoogleFonts.oswald(
+          fontWeight: FontWeight.bold, 
+          fontSize: 18, 
+        
+          
+          ), )
+        ,
 
+        actions: [
 
   IconButton(
             icon: const Icon( Icons.analytics_outlined),
@@ -70,19 +82,38 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
+          IconButton(
+            onPressed: () {
+            themeServices.switchTheme();
+          },
+           icon: Icon(Icons.brightness_6)
+        )
+
+
             
+
        
         ],
         
         ),
       body: 
+      
           Column(
+          
+           // crossAxisAlignment: CrossAxisAlignment.center,
+           
        children: [ 
 
-//  Image.asset(
-//   'assets/gif/blue_monday.gif',
-//   fit: BoxFit.cover,
-// ),
+SizedBox(
+  height: 80,
+),
+
+ Image.asset(
+  'assets/gif/blue_monday.gif',
+
+  
+  fit: BoxFit.cover,
+),
 
 
 SizedBox(
@@ -92,11 +123,13 @@ SizedBox(
 
          ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
-            child: Text("Check My Mood"),
+            child: Text("Check My Mood",
+            style: GoogleFonts.ubuntu(),
+            ),
           ),
   
 
-     ]   )
+            ]   )
           // ElevatedButton(
           //   onPressed: () => Get.to(() => summary_scre),
           //   child: Text("View Summary"),
