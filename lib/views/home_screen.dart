@@ -76,19 +76,27 @@ class HomeScreen extends StatelessWidget {
         
         ),
       body: 
-          Center(
-       child: 
-          IconButton(
-            icon: Icon(Icons.favorite, size: 225,
-               color: Colors.redAccent,),
-            
+          Column(
+       children: [ 
 
+//  Image.asset(
+//   'assets/gif/blue_monday.gif',
+//   fit: BoxFit.cover,
+// ),
+
+
+SizedBox(
+  height: 25,
+),
+
+
+         ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
-            //child: Text("Check My Mood"),
+            child: Text("Check My Mood"),
           ),
   
 
-          )
+     ]   )
           // ElevatedButton(
           //   onPressed: () => Get.to(() => summary_scre),
           //   child: Text("View Summary"),
