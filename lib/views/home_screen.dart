@@ -5,10 +5,12 @@ import 'package:pulse_mood/views/history.dart';
 import '../controllers/mood_controller.dart';
 import 'scanner_screen.dart';
 import 'summary_screen.dart';
+import 'package:pulse_mood/thme/themeService.dart';
 //import '../views/summary_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final controller = Get.find<MoodController>();
+   final themeServices = ThemeService();
 
 
   void showBottomSheet(BuildContext context){
@@ -54,14 +56,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-     
+     backgroundColor: Colors.white ,
       appBar: AppBar(
         title: 
         Center(
           child: 
-        Text("Mood Checker")),
+        Text("Mood Checker", )
+        ),
         actions: [
-
 
   IconButton(
             icon: const Icon( Icons.analytics_outlined),
@@ -70,19 +72,35 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
+          IconButton(onPressed: () {
+            themeServices.switchTheme();
+          }, icon: Icon(Icons.brightness_6))
+
+
             
+
        
         ],
         
         ),
       body: 
+      
           Column(
+          
+           // crossAxisAlignment: CrossAxisAlignment.center,
+           
        children: [ 
 
-//  Image.asset(
-//   'assets/gif/blue_monday.gif',
-//   fit: BoxFit.cover,
-// ),
+SizedBox(
+  height: 80,
+),
+
+ Image.asset(
+  'assets/gif/blue_monday.gif',
+
+  
+  fit: BoxFit.cover,
+),
 
 
 SizedBox(
@@ -96,7 +114,7 @@ SizedBox(
           ),
   
 
-     ]   )
+            ]   )
           // ElevatedButton(
           //   onPressed: () => Get.to(() => summary_scre),
           //   child: Text("View Summary"),

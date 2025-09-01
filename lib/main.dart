@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'data/mood_model.dart';
 import 'views/home_screen.dart';
 import 'controllers/mood_controller.dart';
+import 'thme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: Themes.light,
+      darkTheme: Themes.dark,
+      themeMode: ThemeMode.system,
       title: 'Mood Checker',
       home: HomeScreen(),
     );
