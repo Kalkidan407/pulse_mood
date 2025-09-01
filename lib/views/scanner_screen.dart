@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:heart_bpm/heart_bpm.dart';
 import 'package:get/get.dart';
+//get/get_core/src/get_main.dart
+
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pulse_mood/test.dart';
 import '../controllers/mood_controller.dart';
 import 'result_screen.dart';
@@ -15,34 +18,51 @@ class _ScannerScreenState extends State<ScannerScreen> {
   int  minBpm = 40;
   int maxBpm = 200;
   List<int> recentBPMs = [];
+  bool isScanning = true;
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Scanner")),
-      body: Center(
-        child: HeartBPMDialog(
+      body: 
+      Column(
+        children: [
+          SizedBox(height: 20,),
+
+Container(
+  child: Image.asset('assets/images/hairy-cartoon-7322434_1280.png', height: 83,),
+),
+
+SizedBox(height: 15,),
+
+      Container(
+        padding: EdgeInsets.only(top: 25, bottom: 40, left: 90, right: 50 ),
+        child: 
+        isScanning ?
+        HeartBPMDialog(
           context: context,
+          cameraWidgetHeight: 280,
+          cameraWidgetWidth: 185,
+          showTextValues: false,
+          borderRadius: 10,
+          centerLoadingWidget: Column(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 10,),
+              Text("Initializing Sensor..." , style: TextStyle(color: Colors.black),),
+
+            ],
+          ),
+
           onRawData: (value) {
             
           }, // can ignore
-          onBPM: (value) {
+
+        onBPM: (value) {
+
+   if (!isScanning) return;
   if(value < minBpm || value > maxBpm ){
-  //   recentBPMs.add(value);
-  
-  //      if(recentBPMs.length >= 3){
-  //       double avg = recentBPMs.reduce(
-  //         (a,b) => a+ b)/recentBPMs.length;
-
-  //         Get.to(
-  //            () => ResultScreen(bpm: avg.toInt())
-  //         );
-  //         recentBPMs.clear();
-  //      }
-
-  // } else{
-
     recentBPMs.clear();
     return;
   }
@@ -56,17 +76,44 @@ if( recentBPMs.length > 5){
      double avg = recentBPMs.reduce(
       (a,b) => a + b
      )/ recentBPMs.length;
+
+  final avgInt = avg.toInt();
+  setState(
+    () => isScanning = false
+  );
+
+
+
      bool stable  = recentBPMs.every(
        (bpm) => (bpm - avg).abs() < 5
      );
+     
      if(stable && recentBPMs.length == 5){
-      Get.to( () => ResultScreen(bpm: avg.toInt()));
+      setState(() {
+        isScanning = false;
+      });
       recentBPMs.clear();
+      
+     
+     // recentBPMs.clear();
      }
 
+      Get.to(
+    () => ResultScreen(
+        bpm: avgInt)
+    
+    )?.then(
+        (_) {
+  setState(() => isScanning = true); // restart when user returns
+}
+);
+
           },
-        ),
+        ) :
+        Container()
       ),
+        ]
+      )
     );
   }
 }

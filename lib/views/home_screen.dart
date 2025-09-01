@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:pulse_mood/views/history.dart';
 import '../controllers/mood_controller.dart';
 import 'scanner_screen.dart';
@@ -8,6 +9,46 @@ import 'summary_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final controller = Get.find<MoodController>();
+
+
+  void showBottomSheet(BuildContext context){
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20)
+            )
+          ),
+           builder: (context){
+            return DraggableScrollableSheet(
+              initialChildSize: 0.4,
+              minChildSize: 0.2,
+              maxChildSize: 0.9,
+              expand: false,
+              builder: (context, ScrollController){
+                return 
+                       
+             
+             Obx(() => ListView.builder(
+              itemCount: controller.moods.length,
+              itemBuilder: (ctx, i) {
+                final mood = controller.moods[i];
+                return ListTile(
+                  title: Text(mood.mood),
+                  subtitle: Text(mood.date.toString()),
+                );
+              },
+            ));
+        
+              
+              }
+              
+              );
+           },
+           
+           );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +62,41 @@ class HomeScreen extends StatelessWidget {
         Text("Mood Checker")),
         actions: [
 
-          FloatingActionButton(
 
-            backgroundColor: Colors.white,
+  IconButton(
+            icon: const Icon( Icons.analytics_outlined),
             onPressed: () {
-             Get.to(History());
-
+                showBottomSheet(context);
             },
-            child: Icon(
-              Icons.analytics_outlined
-            ),
+          ),
+
             
-            
-            )
+       
         ],
         
         ),
       body: 
-          Center(
-       child: 
-          ElevatedButton(
+          Column(
+       children: [ 
+
+//  Image.asset(
+//   'assets/gif/blue_monday.gif',
+//   fit: BoxFit.cover,
+// ),
+
+
+SizedBox(
+  height: 25,
+),
+
+
+         ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
             child: Text("Check My Mood"),
           ),
-          )
+  
+
+     ]   )
           // ElevatedButton(
           //   onPressed: () => Get.to(() => summary_scre),
           //   child: Text("View Summary"),
