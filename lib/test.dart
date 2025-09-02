@@ -1,37 +1,27 @@
-import 'package:flutter/material.dart';
+// ElevatedButton(
+//   onPressed: () => Get.to(() => ScannerScreen()),
+//   style: ButtonStyle(
+//     backgroundColor: WidgetStateProperty.all(Colors.amber),
+//     elevation: WidgetStateProperty.all(8.0),
+//     shadowColor: WidgetStateProperty.all(Colors.black),
+//     shape: WidgetStateProperty.all(
+//       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//     ),
+//     padding: WidgetStateProperty.all(
+//       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+//     ),
+//   ),
+//   child: const Text('Scan'),
+// );
 
-class Themes {
-  static final light = ThemeData(
-    brightness: Brightness.light,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.lightBlue,
-      brightness: Brightness.light,
-    ).copyWith(
-      background: Colors.white, // scaffold background
-      onBackground: Colors.black, // text on background
-    ),
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.green,
-      foregroundColor: Colors.red,
-      iconTheme: IconThemeData(color: Colors.red),
-    ),
-  );
 
-  static final dark = ThemeData(
-    brightness: Brightness.dark,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.lightBlue,
-      brightness: Brightness.dark,
-    ).copyWith(
-      background: Colors.black, // scaffold background in dark mode
-      onBackground: Colors.white,
-    ),
-    scaffoldBackgroundColor: Colors.black,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
-      iconTheme: IconThemeData(color: Colors.black),
-    ),
-  );
-}
+// style: ButtonStyle(
+  // backgroundColor: WidgetStateProperty.resolveWith((states) {
+  //   if (states.contains(WidgetState.disabled)) return Colors.grey;
+  //   if (states.contains(WidgetState.pressed))  return Colors.amber.shade700;
+  //   return Colors.amber;
+  // }),
+  // elevation: WidgetStateProperty.resolveWith((states) {
+  //   return states.contains(WidgetState.pressed) ? 2.0 : 8.0;
+  // }),
+// ),
