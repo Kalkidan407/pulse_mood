@@ -1,27 +1,43 @@
-// ElevatedButton(
-//   onPressed: () => Get.to(() => ScannerScreen()),
-//   style: ButtonStyle(
-//     backgroundColor: WidgetStateProperty.all(Colors.amber),
-//     elevation: WidgetStateProperty.all(8.0),
-//     shadowColor: WidgetStateProperty.all(Colors.black),
-//     shape: WidgetStateProperty.all(
-//       RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+// //// list to store raw values in
+// List<SensorValue> data = [];
+
+// /// variable to store measured BPM value
+// int bpmValue;
+
+// @override
+// Widget build(BuildContext context) {
+// return Scaffold(
+//     appBar: AppBar(
+//         title: Text('Heart BPM Demo'),
 //     ),
-//     padding: WidgetStateProperty.all(
-//       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-//     ),
+//     body: Column(
+//     children: [
+//         isBPMEnabled ? HeartBPMDialog(
+//                 context: context,
+//                 onRawData: (value) {
+//                     setState(() {
+//                         // add raw data points to the list
+//                         // with a maximum length of 100
+//                         if (data.length == 100)
+//                             data.removeAt(0);
+//                         data.add(value);
+//                     });
+//                 },
+//                 onBPM: (value) => setState(() {
+//                     bpmValue = value;
+//                 }),
+//             )
+//           : SizedBox(),
+//       Center(
+//         child: ElevatedButton.icon(
+//             icon: Icon(Icons.favorite_rounded),
+//             label: Text(isBPMEnabled
+//                 ? "Stop measurement" : "Measure BPM"),
+//             onPressed: () => setState(() =>
+//                 isBPMEnabled = !isBPMEnabled
+//             ),
+//         ),
+//       ),
+//     ],
 //   ),
-//   child: const Text('Scan'),
 // );
-
-
-// style: ButtonStyle(
-  // backgroundColor: WidgetStateProperty.resolveWith((states) {
-  //   if (states.contains(WidgetState.disabled)) return Colors.grey;
-  //   if (states.contains(WidgetState.pressed))  return Colors.amber.shade700;
-  //   return Colors.amber;
-  // }),
-  // elevation: WidgetStateProperty.resolveWith((states) {
-  //   return states.contains(WidgetState.pressed) ? 2.0 : 8.0;
-  // }),
-// ),
