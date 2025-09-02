@@ -1,9 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter_plus/icons/cib.dart';
 
+
+Map<int, String> red = {};
 class Themes {
   static final light = ThemeData(
     brightness: Brightness.light,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      
+    ),
    colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.white,
       brightness: Brightness.light,

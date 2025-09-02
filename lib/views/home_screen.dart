@@ -105,11 +105,11 @@ class HomeScreen extends StatelessWidget {
        children: [ 
 
 SizedBox(
-  height: 80,
+  height: 70,
 ),
 
  Image.asset(
-  'assets/gif/blue_monday.gif',
+  'assets/gif/world_emo.gif',
 
   
   fit: BoxFit.cover,
@@ -123,9 +123,36 @@ SizedBox(
 
          ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
-            child: Text("Check My Mood",
-            style: GoogleFonts.ubuntu(),
+              style: ButtonStyle(
+           // backgroundColor: WidgetStateProperty.all(Colors.lightBlue),
+            //elevation: WidgetStateProperty.all(8.0),
+              backgroundColor: WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.hovered)) return Colors.grey;
+    if (states.contains(WidgetState.pressed))  return Colors.blue.shade200;
+    return Colors.yellow[700];
+  }),
+             elevation: WidgetStateProperty.resolveWith((states) {
+    return states.contains(WidgetState.pressed) ? 2.0 : 8.0;
+  }),
+            shadowColor: WidgetStateProperty.all(
+              Colors.black
             ),
+// padding: WidgetStateProperty.all(
+// const EdgeInsets.symmetric(
+//   horizontal: 18,
+//   vertical: 12
+// )
+// ),
+
+            
+            ),
+            child: Text("Click here to check your Mood",
+            style: GoogleFonts.ubuntu(
+              fontWeight: FontWeight.w600,
+              color: Colors.white
+            ),
+            ),
+        
           ),
   
 

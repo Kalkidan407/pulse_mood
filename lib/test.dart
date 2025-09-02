@@ -1,37 +1,43 @@
-import 'package:flutter/material.dart';
+// //// list to store raw values in
+// List<SensorValue> data = [];
 
-class Themes {
-  static final light = ThemeData(
-    brightness: Brightness.light,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.lightBlue,
-      brightness: Brightness.light,
-    ).copyWith(
-      background: Colors.white, // scaffold background
-      onBackground: Colors.black, // text on background
-    ),
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.green,
-      foregroundColor: Colors.red,
-      iconTheme: IconThemeData(color: Colors.red),
-    ),
-  );
+// /// variable to store measured BPM value
+// int bpmValue;
 
-  static final dark = ThemeData(
-    brightness: Brightness.dark,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.lightBlue,
-      brightness: Brightness.dark,
-    ).copyWith(
-      background: Colors.black, // scaffold background in dark mode
-      onBackground: Colors.white,
-    ),
-    scaffoldBackgroundColor: Colors.black,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
-      iconTheme: IconThemeData(color: Colors.black),
-    ),
-  );
-}
+// @override
+// Widget build(BuildContext context) {
+// return Scaffold(
+//     appBar: AppBar(
+//         title: Text('Heart BPM Demo'),
+//     ),
+//     body: Column(
+//     children: [
+//         isBPMEnabled ? HeartBPMDialog(
+//                 context: context,
+//                 onRawData: (value) {
+//                     setState(() {
+//                         // add raw data points to the list
+//                         // with a maximum length of 100
+//                         if (data.length == 100)
+//                             data.removeAt(0);
+//                         data.add(value);
+//                     });
+//                 },
+//                 onBPM: (value) => setState(() {
+//                     bpmValue = value;
+//                 }),
+//             )
+//           : SizedBox(),
+//       Center(
+//         child: ElevatedButton.icon(
+//             icon: Icon(Icons.favorite_rounded),
+//             label: Text(isBPMEnabled
+//                 ? "Stop measurement" : "Measure BPM"),
+//             onPressed: () => setState(() =>
+//                 isBPMEnabled = !isBPMEnabled
+//             ),
+//         ),
+//       ),
+//     ],
+//   ),
+// );

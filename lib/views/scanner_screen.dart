@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pulse_mood/test.dart';
-import '../controllers/mood_controller.dart';
+import './heartcont.dart';
 import 'result_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
@@ -31,10 +31,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
           SizedBox(height: 20,),
 
 Container(
-  child: Image.asset('assets/images/hairy-cartoon-7322434_1280.png', height: 83,),
+  child: HeartShape(),
 ),
 
-SizedBox(height: 15,),
+SizedBox(height: 35,),
 
       Container(
         padding: EdgeInsets.only(top: 25, bottom: 40, left: 90, right: 50 ),
@@ -42,10 +42,10 @@ SizedBox(height: 15,),
         isScanning ?
         HeartBPMDialog(
           context: context,
-          cameraWidgetHeight: 280,
-          cameraWidgetWidth: 185,
-          showTextValues: false,
-          borderRadius: 10,
+          cameraWidgetHeight: 80,
+          cameraWidgetWidth:65,
+          showTextValues: true,
+          borderRadius: 80,
           centerLoadingWidget: Column(
             children: [
               CircularProgressIndicator(),
@@ -98,19 +98,28 @@ if( recentBPMs.length > 5){
      // recentBPMs.clear();
      }
 
-      Get.to(
-    () => ResultScreen(
-        bpm: avgInt)
+//       Get.to(
+//     () => ResultScreen(
+//         bpm: avgInt)
     
-    )?.then(
-        (_) {
-  setState(() => isScanning = true); // restart when user returns
-}
-);
+//     )?.then(
+//         (_) {
+//   setState(() => isScanning = true); // restart when user returns
+// }
+// );
 
           },
         ) :
-        Container()
+       Center(
+        child: ElevatedButton.icon(
+            icon: Icon(Icons.favorite_rounded),
+            label: Text(isScanning
+                ? "Stop measurement" : "Measure BPM"),
+            onPressed: () => setState(() =>
+                isScanning = !isScanning 
+            ),
+        ),
+      ),
       ),
         ]
       )
