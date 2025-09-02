@@ -9,10 +9,17 @@ import 'package:pulse_mood/thme/themeService.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import '../views/summary_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.find<MoodController>();
+
    final themeServices = ThemeService();
 
+  bool _isPressed = false;
 
   void showBottomSheet(BuildContext context){
         showModalBottomSheet(
@@ -120,39 +127,41 @@ SizedBox(
   height: 25,
 ),
 
+  GestureDetector(
+    onTapDown: (_) => setState(
+      () => _isPressed = true
+    ),
+    onTapUp: (_) => setState(() {
+      _isPressed= false;
+    }),
 
-         ElevatedButton(
+
+     child:   
+     AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+      transform: Matrix4.identity()
+         ..scale(_isPressed ? 0.95 : 1.0),
+    child:   ElevatedButton(
             onPressed: () => Get.to(() => ScannerScreen()),
-              style: ButtonStyle(
-           // backgroundColor: WidgetStateProperty.all(Colors.lightBlue),
-            //elevation: WidgetStateProperty.all(8.0),
-              backgroundColor: WidgetStateProperty.resolveWith((states) {
-    if (states.contains(WidgetState.hovered)) return Colors.grey;
-    if (states.contains(WidgetState.pressed))  return Colors.blue.shade200;
-    return Colors.yellow[700];
-  }),
-             elevation: WidgetStateProperty.resolveWith((states) {
-    return states.contains(WidgetState.pressed) ? 2.0 : 8.0;
-  }),
-            shadowColor: WidgetStateProperty.all(
-              Colors.black
+              style: 
+             ElevatedButton.styleFrom(
+              backgroundColor: _isPressed ? const Color.fromARGB(255, 255, 193, 7) : Colors.amber,
+              elevation: _isPressed ? 2 : 8, // shadow lowers when pressed
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
-// padding: WidgetStateProperty.all(
-// const EdgeInsets.symmetric(
-//   horizontal: 18,
-//   vertical: 12
-// )
-// ),
-
-            
-            ),
-            child: Text("Click here to check your Mood",
+            child: Text("What’s your vibe? Click me!",
             style: GoogleFonts.ubuntu(
               fontWeight: FontWeight.w600,
               color: Colors.white
             ),
             ),
         
+          ),
+  ),
           ),
   
 

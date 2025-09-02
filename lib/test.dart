@@ -1,43 +1,45 @@
-// //// list to store raw values in
-// List<SensorValue> data = [];
+import 'package:flutter/material.dart';
 
-// /// variable to store measured BPM value
-// int bpmValue;
+class AnimatedButtonExample extends StatefulWidget {
+  const AnimatedButtonExample({super.key});
 
-// @override
-// Widget build(BuildContext context) {
-// return Scaffold(
-//     appBar: AppBar(
-//         title: Text('Heart BPM Demo'),
-//     ),
-//     body: Column(
-//     children: [
-//         isBPMEnabled ? HeartBPMDialog(
-//                 context: context,
-//                 onRawData: (value) {
-//                     setState(() {
-//                         // add raw data points to the list
-//                         // with a maximum length of 100
-//                         if (data.length == 100)
-//                             data.removeAt(0);
-//                         data.add(value);
-//                     });
-//                 },
-//                 onBPM: (value) => setState(() {
-//                     bpmValue = value;
-//                 }),
-//             )
-//           : SizedBox(),
-//       Center(
-//         child: ElevatedButton.icon(
-//             icon: Icon(Icons.favorite_rounded),
-//             label: Text(isBPMEnabled
-//                 ? "Stop measurement" : "Measure BPM"),
-//             onPressed: () => setState(() =>
-//                 isBPMEnabled = !isBPMEnabled
-//             ),
-//         ),
-//       ),
-//     ],
-//   ),
-// );
+  @override
+  State<AnimatedButtonExample> createState() => _AnimatedButtonExampleState();
+}
+
+class _AnimatedButtonExampleState extends State<AnimatedButtonExample> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTapDown: (_) => setState(() => _isPressed = true),   // press down
+        onTapUp: (_) => setState(() => _isPressed = false),    // release
+        onTapCancel: () => setState(() => _isPressed = false), // cancel
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200), // animation speed
+          curve: Curves.easeInOut,
+          transform: Matrix4.identity()
+            ..scale(_isPressed ? 0.95 : 1.0), // shrink on press
+          child: ElevatedButton(
+            onPressed: () {
+              // Your action here
+              print("Button pressed!");
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _isPressed ? Colors.amber.shade700 : Colors.amber,
+              elevation: _isPressed ? 2 : 8, // shadow lowers when pressed
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text("Animated Button"),
+          ),
+        ),
+      ),
+    );
+  }
+}
+// 
