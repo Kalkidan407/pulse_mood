@@ -23,11 +23,12 @@ class HeartShape extends StatelessWidget {
           ),
           width: 160,
           height: 270,
-           child: 
-          SizedBox(
-          height: 60,
-          width: 40,
-        child:   Text("90", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+        //    child: 
+        //   SizedBox(
+        //   height: 60,
+        //   width: 40,
+        // child:   Text("90", style: TextStyle(fontSize: 20, 
+        // fontWeight: FontWeight.bold),)),
           //color: const Color.fromARGB(255, 250, 40, 110), // background color of heart
         ),
       ),
